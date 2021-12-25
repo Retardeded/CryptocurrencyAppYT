@@ -1,4 +1,4 @@
-package com.plcoding.cryptocurrencyappyt
+package com.plcoding.cryptocurrencyappyt.presentation
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
