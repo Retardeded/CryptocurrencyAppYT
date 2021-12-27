@@ -10,11 +10,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import com.plcoding.githubrepoapp.data.remote.dto.Owner
+import com.plcoding.githubrepoapp.data.remote.dto.License
+import com.plcoding.githubrepoapp.domain.model.Owner
 
 @Composable
-fun RepoOwner(
-    owner: Owner,
+fun RepoLicense(
+    license: License,
 ) {
     Box(
         modifier = Modifier
@@ -26,7 +27,7 @@ fun RepoOwner(
             .padding(10.dp)
     ) {
         Text(
-            text = owner.type,
+            text = license.name,
             color = MaterialTheme.colors.primary,
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.body2

@@ -1,6 +1,9 @@
 package com.plcoding.githubrepoapp.data.remote.dto
 
-data class Owner(
+import com.plcoding.githubrepoapp.domain.model.Owner
+import com.plcoding.githubrepoapp.domain.model.RepoDetail
+
+data class OwnerDto(
     val avatar_url: String,
     val events_url: String,
     val followers_url: String,
@@ -20,3 +23,10 @@ data class Owner(
     val type: String,
     val url: String
 )
+
+fun OwnerDto.toOwner(): Owner {
+    return Owner(
+       avatar_url = avatar_url,
+        type = type
+    )
+}

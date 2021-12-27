@@ -12,32 +12,30 @@ import kotlinx.coroutines.flow.onEach
 import javax.inject.Inject
 
 @HiltViewModel
-class RepoListViewModel @Inject constructor(
+class HeaderViewModel @Inject constructor(
     private val getReposUseCase: GetReposUseCase
 ) : ViewModel() {
 
-    private val _state = mutableStateOf(RepoListState())
-    val state: State<RepoListState> = _state
+    private val _state = mutableStateOf(HeaderState())
+    val state: State<HeaderState> = _state
 
     init {
-        getRepos()
+        getHeader()
     }
 
-    private fun getRepos() {
+    private fun getHeader() {
         getReposUseCase().onEach { result ->
             when (result) {
                 is Resource.Success -> {
-                    var result = result.data ?: emptyList()
-                    result = result.sortedByDescending{ it.stargazers_count }
-                    _state.value = RepoListState(repos = result)
+                    _state.value = HeaderState(owner = result.data!![0].owner)
                 }
                 is Resource.Error -> {
-                    _state.value = RepoListState(
+                    _state.value = HeaderState(
                         error = result.message ?: "An unexpected error occured"
                     )
                 }
                 is Resource.Loading -> {
-                    _state.value = RepoListState(isLoading = true)
+                    _state.value = HeaderState(isLoading = true)
                 }
             }
         }.launchIn(viewModelScope)

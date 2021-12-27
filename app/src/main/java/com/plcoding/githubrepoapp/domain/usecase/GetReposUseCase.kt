@@ -17,7 +17,8 @@ class GetReposUseCase @Inject constructor(
     operator fun invoke(): Flow<Resource<List<Repo>>> = flow {
         try {
             emit(Resource.Loading<List<Repo>>())
-            val repos = repository.getRepos().map { it.toRepo() }
+            val repos = repository.getRepos().map {
+                it.toRepo() }
             emit(Resource.Success<List<Repo>>(repos))
         } catch(e: HttpException) {
             emit(Resource.Error<List<Repo>>(e.localizedMessage ?: "An unexpected error occured"))

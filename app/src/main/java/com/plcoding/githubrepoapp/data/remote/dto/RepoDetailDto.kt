@@ -60,7 +60,7 @@ data class RepoDetailDto(
     val open_issues: Int,
     val open_issues_count: Int,
     val organization: Organization,
-    val owner: Owner,
+    val owner: OwnerDto,
     val `private`: Boolean,
     val pulls_url: String,
     val pushed_at: String,
@@ -90,14 +90,17 @@ data class RepoDetailDto(
 fun RepoDetailDto.toRepoDetail(): RepoDetail {
     return RepoDetail(
         id = id,
-        full_name = full_name,
+        name = name,
         forks = forks,
         language = language,
         stargazers_count = stargazers_count,
 
         description = description,
         license = license,
-        owner = owner,
-        topics = topics
+        topics = topics,
+
+        created_at = created_at.substring(0,10),
+        updated_at = updated_at.substring(0,10),
+        open_issues_count = open_issues_count
     )
 }

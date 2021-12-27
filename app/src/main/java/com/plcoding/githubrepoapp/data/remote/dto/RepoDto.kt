@@ -58,7 +58,7 @@ data class RepoDto(
     val notifications_url: String,
     val open_issues: Int,
     val open_issues_count: Int,
-    val owner: Owner,
+    val owner: OwnerDto,
     val `private`: Boolean,
     val pulls_url: String,
     val pushed_at: String,
@@ -85,9 +85,10 @@ data class RepoDto(
 fun RepoDto.toRepo(): Repo {
     return Repo(
         id = id,
-        full_name = full_name,
+        name = name,
         forks = forks,
         language = language,
-        stargazers_count = stargazers_count
+        stargazers_count = stargazers_count,
+        owner = owner.toOwner(),
     )
 }
